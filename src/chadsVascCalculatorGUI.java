@@ -90,19 +90,26 @@ public class chadsVascCalculatorGUI extends JFrame {
     }
 
     private void calculateCHADSVASC() {
+
+        try {
         int result = 0;
         int age = Integer.parseInt(ageField.getText());
 
         if (chfHistory.isSelected()) result++;
         if (hypertensionHistory.isSelected()) result++;
+
         if (age >= 75) result += 2;
         else if (age >= 65) result++;
+
         if (diabetesHistory.isSelected()) result++;
         if (tiaHistory.isSelected()) result++;
         if (vascularDisease.isSelected()) result++;
         if (femaleButton.isSelected()) result++;
 
         resultLabel.setText("Risk Score: " + result);
+        } catch(NumberFormatException e){
+            JOptionPane.showMessageDialog( this, "Please enter an integer inside the Age Field", "Input Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public static void main(String[] args) {
