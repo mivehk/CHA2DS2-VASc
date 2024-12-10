@@ -113,6 +113,10 @@ public class chadsVascCalculatorGUI extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> new chadsVascCalculatorGUI().setVisible(true));
+        //SwingUtilities.invokeLater(() -> new chadsVascCalculatorGUI().setVisible(true));
+        SwingUtilities.invokeLater( () -> {
+            chadsVascCalculatorGUI cha = new chadsVascCalculatorGUI();
+            cha.setVisible(true);
+        });
     }
 }
