@@ -58,12 +58,13 @@ public class chadsVascCalculatorGUI extends JFrame {
         // Panel for calculate button
         JButton calculateButton = new JButton("Calculate");
         calculateButton.setPreferredSize(new Dimension(150, 40)); // Set preferred size for calculateButton
-        calculateButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                calculateCHADSVASC();
-            }
-        });
+        //calculateButton.addActionListener(new ActionListener() {
+           // @Override
+           // public void actionPerformed(ActionEvent e) {
+                //calculateCHADSVASC();
+            //}
+       // });
+        calculateButton.addActionListener( e-> calculateCHADSVASC());
 
         // Center the button using a FlowLayout panel
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -98,8 +99,10 @@ public class chadsVascCalculatorGUI extends JFrame {
         if (chfHistory.isSelected()) result++;
         if (hypertensionHistory.isSelected()) result++;
 
-        if (age >= 75) result += 2;
+        if (age < 1) throw new NumberFormatException();
+        else if (age >= 75) result += 2;
         else if (age >= 65) result++;
+        
 
         if (diabetesHistory.isSelected()) result++;
         if (tiaHistory.isSelected()) result++;
@@ -108,7 +111,7 @@ public class chadsVascCalculatorGUI extends JFrame {
 
         resultLabel.setText("Risk Score: " + result);
         } catch(NumberFormatException e){
-            JOptionPane.showMessageDialog( this, "Please enter an integer inside the Age Field", "Input Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog( this, "Please enter valid Age (e.g., a number above zero)", "Input Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
