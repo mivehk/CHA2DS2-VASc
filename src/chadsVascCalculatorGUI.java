@@ -15,30 +15,29 @@ public class chadsVascCalculatorGUI extends JFrame {
     private JRadioButton maleButton;
     private JRadioButton femaleButton;
     private JLabel resultLabel;
+    private JButton calculateButton;
 
     public chadsVascCalculatorGUI() {
-        setTitle("CHA2DS2-VASc Calculator");
-        setSize(500, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("CHA2DS2-VASc Calculator");
+        this.setSize(500, 500);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel mainPanel = new JPanel();
         mainPanel.setBorder(new EmptyBorder(12, 12, 12, 12));
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
         // Adding fields and components to the main panel with custom size for JTextField and JButton
-        mainPanel.add(createRow("CHF History", chfHistory = new JCheckBox()));
-        mainPanel.add(createRow("Hypertension History", hypertensionHistory = new JCheckBox()));
+        mainPanel.add(thisRow("CHF History", chfHistory = new JCheckBox()));
+        mainPanel.add(thisRow("Hypertension History", hypertensionHistory = new JCheckBox()));
 
-        JLabel ageFieldLabel = new JLabel("Age");
-        ageField = new JTextField();
+        mainPanel.add(thisRow("Age", ageField= new JTextField()));
         ageField.setPreferredSize(new Dimension(60, 30)); // Set preferred size for ageField
-        mainPanel.add(createRow(ageFieldLabel, ageField));
 
-        mainPanel.add(createRow("Diabetes History", diabetesHistory = new JCheckBox()));
-        mainPanel.add(createRow("TIA History", tiaHistory = new JCheckBox()));
-        mainPanel.add(createRow("Vascular Disease", vascularDisease = new JCheckBox()));
+        mainPanel.add(thisRow("Diabetes History", diabetesHistory = new JCheckBox()));
+        mainPanel.add(thisRow("TIA History", tiaHistory = new JCheckBox()));
+        mainPanel.add(thisRow("Vascular Disease", vascularDisease = new JCheckBox()));
 
-        JLabel sexAtBirthLabel = new JLabel("Sex At Birth: ");
+        //JLabel sexAtBirthLabel = new JLabel("Sex At Birth: ");
         maleButton = new JRadioButton("Male");
         femaleButton = new JRadioButton("Female");
         ButtonGroup sexAtBirthGroup = new ButtonGroup();
@@ -50,7 +49,7 @@ public class chadsVascCalculatorGUI extends JFrame {
         sexPanel.add(maleButton);
         sexPanel.add(femaleButton);
 
-        mainPanel.add(createRow(sexAtBirthLabel, sexPanel));
+        mainPanel.add(thisRow("Sex At Birth", sexPanel));
 
         resultLabel = new JLabel("Risk Score: ");
         mainPanel.add(resultLabel);
@@ -74,21 +73,21 @@ public class chadsVascCalculatorGUI extends JFrame {
         add(mainPanel);
     }
 
-    // Helper method to create a row with a label and component
-    private JPanel createRow(String labelText, JComponent component) {
+    // Helper method that create a row with a string and a component
+    private JPanel thisRow(String labelText, JComponent component) {
         JPanel rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         rowPanel.add(new JLabel(labelText));
         rowPanel.add(component);
         return rowPanel;
     }
 
-    // Overloaded helper method to create a row with JLabel and another component
-    private JPanel createRow(JLabel label, JComponent component) {
+    // Overloaded helper method that create a row with JLabel and another component
+    /*private JPanel thisRow(JLabel label, JComponent component) {
         JPanel rowPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         rowPanel.add(label);
         rowPanel.add(component);
         return rowPanel;
-    }
+    }*/
 
     private void calculateCHADSVASC() {
 
@@ -102,7 +101,7 @@ public class chadsVascCalculatorGUI extends JFrame {
         if (age < 1) throw new NumberFormatException();
         else if (age >= 75) result += 2;
         else if (age >= 65) result++;
-        
+
 
         if (diabetesHistory.isSelected()) result++;
         if (tiaHistory.isSelected()) result++;
