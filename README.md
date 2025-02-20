@@ -17,6 +17,8 @@ More than 50 substances that affect blood coagulation have been found in human b
 *A* represents the risk factor of age >= 65 with 1 point
 *Sc* represents the risk factor of Sex at Birth with 1 point
 
+![Alt text](images/Sc2025-02-20.png)
+
 
 Here is a poster for diagnostic tools and treatment/prevention techniques commonly used for Afib with an emphasis on epidemiological distribution and determinants:
 
