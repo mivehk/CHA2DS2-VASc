@@ -25,8 +25,8 @@ stages:
   - job: CompileJob
     steps:
     - script: |
-        mkdir -p $(buildDir)
-        javac -d $(buildDir) $(find src -name "*.java")
+        mkdir -p out
+        javac -d out $(find src -name "*.java")
       displayName: 'Compile .java files'
 
 - stage: Package
