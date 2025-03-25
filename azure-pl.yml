@@ -61,8 +61,13 @@ stages:
   jobs:
   - job: ArchiveJob
     steps:
-    - task: PublishBuildArtifacts@1
+    - task: DownloadBuildArtifacts@0
       inputs:
-        PathtoPublish: '$(jarName)'
-        ArtifactName: 'jar-package'
-        publishLocation: 'Container'
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'cha2ds2-vasc'
+        downloadPath: '$(System.DefaultWorkingDirectory)/cha2ds2-vasc'
+    - script: |
+        echo "Contents of downloaded JAR package:"
+        ls -lR $(System.DefaultWorkingDirectory)/cha2ds2-vasc
+      displayName: 'Verify Artifact Download'
