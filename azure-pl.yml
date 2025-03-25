@@ -54,7 +54,8 @@ stages:
         echo "Main-Class: chadsVascCalculatorGUI" > MANIFEST.MF
         ls -R downloaded
         mkdir extracted
-        cp downloaded/* extracted/
+        cp -r downloaded/* extracted/
+        ls -R extracted
         jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C extracted .
       displayName: 'Create JAR File'
     - task: PublishBuildArtifacts@1
