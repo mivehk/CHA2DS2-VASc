@@ -33,20 +33,27 @@ stages:
         echo "Published files:"
         find out -type f 
       displayName: 'Compile .java files'
-    - publish: $(buildDir)/
-      artifact: compiled-classes
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: 'out'
+        ArtifactName: 'compiled-classes'
+        publishLocation: 'Container'
 
 - stage: Package
   displayName: 'Package JAR'
   jobs:
   - job: PackageJob
     steps:
-    - download: current
-      artifact: compiled-classes
+    - task: DownloadBuildArtifacts@0
+      inputs:
+        buildType: 'current'
+        downloadType: 'single'
+        artifactName: 'compiled-classes'
+        downloadPath: '$(System.DefaultWorkingDirectory)/compiled-classes'
     - script: |
         echo "Main-Class: chadsVascCalculatorGUI" > MANIFEST.MF
-        ls -l compiled-classes
-        jar cvfm $(jarName) MANIFEST.MF -C compiled-classes .
+        ls -R compiled-classes
+        jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C compiled-classes .
       displayName: 'Create JAR File'
 
 - stage: Archive
