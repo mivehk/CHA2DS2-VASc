@@ -35,7 +35,7 @@ stages:
       displayName: 'Compile .java files'
     - task: PublishBuildArtifacts@1
       inputs:
-        PathtoPublish: 'out/*'
+        PathtoPublish: 'out'
         ArtifactName: 'compiled-classes'
         publishLocation: 'Container'
 
