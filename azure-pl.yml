@@ -1,0 +1,51 @@
+# Azure Devops Pipeline
+
+trigger:
+- Initial_H
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+variables:
+  buildDir: 'out'
+  jarName: 'cha2ds2-vasc.jar'
+  mainClass: 'chadsVascCalculatorGUI'
+
+stages:
+- stage: Clone
+  displayName: 'Clone Repository'
+  jobs:
+  - job: Checkout
+    steps:
+    - checkout: self
+
+- stage: Compile
+  displayName: 'Compile Java Files'
+  jobs:
+  - job: CompileJob
+    steps:
+    - script: |
+        mkdir -p $(buildDir)
+        javac -d $(buildDir) $(find src -name "*.java")
+      displayName: 'Compile .java files'
+
+- stage: Package
+  displayName: 'Package JAR'
+  jobs:
+  - job: PackageJob
+    steps:
+    - script: |
+        echo "Main-Class: $(mainClass)" > MANIFEST.MF
+        jar cvfm $(jarName) MANIFEST.MF -C $(buildDir) .
+      displayName: 'Create JAR File'
+
+- stage: Archive
+  displayName: 'Archive Artifacts'
+  jobs:
+  - job: ArchiveJob
+    steps:
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(jarName)'
+        ArtifactName: 'jar-package'
+        publishLocation: 'Container'
