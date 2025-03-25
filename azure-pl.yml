@@ -28,12 +28,13 @@ stages:
         mkdir -p out
         find src -name "*.java" > sources.txt
         javac -d out @sources.txt
-        echo "📁 Listing out directory contents:"
+        echo " Confirming compiled classes are created:"
         ls -R out
+        echo "Published files:"
+        find out -type f 
       displayName: 'Compile .java files'
-    - publish: out
+    - publish: $(buildDir)/
       artifact: compiled-classes
-
 
 - stage: Package
   displayName: 'Package JAR'
@@ -44,7 +45,8 @@ stages:
       artifact: compiled-classes
     - script: |
         echo "Main-Class: chadsVascCalculatorGUI" > MANIFEST.MF
-        jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C compiled-classes .
+        ls -l compiled-classes
+        jar cvfm $(jarName) MANIFEST.MF -C compiled-classes .
       displayName: 'Create JAR File'
 
 - stage: Archive
