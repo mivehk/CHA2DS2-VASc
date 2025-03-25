@@ -28,6 +28,8 @@ stages:
         mkdir -p out
         find src -name "*.java" > sources.txt
         javac -d out @sources.txt
+        echo "📁 Listing out directory contents:"
+        ls -R out
       displayName: 'Compile .java files'
     - publish: out
       artifact: compiled-classes
