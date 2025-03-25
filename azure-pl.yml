@@ -26,7 +26,8 @@ stages:
     steps:
     - script: |
         mkdir -p out
-        javac -d out $(find src -name "*.java")
+        find src -name "*.java" > sources.txt
+        javac -d out @sources.txt
       displayName: 'Compile .java files'
 
 - stage: Package
@@ -35,8 +36,8 @@ stages:
   - job: PackageJob
     steps:
     - script: |
-        echo "Main-Class: $(mainClass)" > MANIFEST.MF
-        jar cvfm $(jarName) MANIFEST.MF -C $(buildDir) .
+        echo "Main-Class: chadsVascCalculatorGUI" > MANIFEST.MF
+        jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C out .
       displayName: 'Create JAR File'
 
 - stage: Archive
