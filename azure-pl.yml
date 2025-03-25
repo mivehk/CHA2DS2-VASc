@@ -29,15 +29,20 @@ stages:
         find src -name "*.java" > sources.txt
         javac -d out @sources.txt
       displayName: 'Compile .java files'
+    - publish: out
+      artifact: compiled-classes
+
 
 - stage: Package
   displayName: 'Package JAR'
   jobs:
   - job: PackageJob
     steps:
+    - download: current
+      artifact: compiled-classes
     - script: |
         echo "Main-Class: chadsVascCalculatorGUI" > MANIFEST.MF
-        jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C out .
+        jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C compiled-classes .
       displayName: 'Create JAR File'
 
 - stage: Archive
