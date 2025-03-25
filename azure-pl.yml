@@ -49,11 +49,11 @@ stages:
         buildType: 'current'
         downloadType: 'single'
         artifactName: 'compiled-classes'
-        downloadPath: 'compiled-classes'
+        downloadPath: 'downloaded'
     - script: |
         echo "Main-Class: chadsVascCalculatorGUI" > MANIFEST.MF
         ls -R compiled-classes
-        jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C compiled-classes .
+        jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C downloaded .
       displayName: 'Create JAR File'
     - task: PublishBuildArtifacts@1
       inputs:
