@@ -49,7 +49,7 @@ stages:
         buildType: 'current'
         downloadType: 'single'
         artifactName: 'compiled-classes'
-        downloadPath: '$(System.DefaultWorkingDirectory)/compiled-classes'
+        downloadPath: 'compiled-classes'
     - script: |
         echo "Main-Class: chadsVascCalculatorGUI" > MANIFEST.MF
         ls -R compiled-classes
@@ -71,7 +71,7 @@ stages:
         buildType: 'current'
         downloadType: 'single'
         artifactName: 'cha2ds2-vasc'
-        downloadPath: '$(System.DefaultWorkingDirectory)/cha2ds2-vasc'
+        downloadPath: 'cha2ds2-vasc'
     - script: |
         echo "Contents of downloaded JAR package:"
         ls -lR $(System.DefaultWorkingDirectory)/cha2ds2-vasc
