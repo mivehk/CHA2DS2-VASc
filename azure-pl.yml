@@ -54,7 +54,7 @@ stages:
         echo "Main-Class: chadsVascCalculatorGUI" > MANIFEST.MF
         echo “show what is inside downloaded:”
         ls -R downloaded
-        jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C downloaded compiled-classes .
+        jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C downloaded/compiled-classes .
       displayName: 'Create JAR File'
     - task: PublishBuildArtifacts@1
       inputs:
