@@ -52,8 +52,10 @@ stages:
         downloadPath: 'downloaded'
     - script: |
         echo "Main-Class: chadsVascCalculatorGUI" > MANIFEST.MF
-        ls -R compiled-classes
-        jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C downloaded .
+        ls -R downloaded
+        mkdir extracted
+        cp downloaded/* extracted/
+        jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C extracted .
       displayName: 'Create JAR File'
     - task: PublishBuildArtifacts@1
       inputs:
