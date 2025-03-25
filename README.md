@@ -1,10 +1,13 @@
-# CHA2DS2-VASc Scoring System
+# CHA2DS2-VASc Scoring System with Azure DevOps CI/CD
 
-American College of Cardiology and American Heart Association (ACC/AHA) suggested a scoring system, CHA2DS2-VASc as a potential predictor of stroke for patients with atrial fibrillation(Afib), and recommended long-term oral anticoagulant for non-valvular Afib patients with moderate to high CHA2DS2-VASc scores (Male >=2 and Female >=3).
+This project is integrated with Azure DevOps Pipelines to automatically compile and package the Java source code every time changes are pushed to the GitHub repository. The pipeline is defined in the "azure-pl.yml" file, which handles source checkout, Java compilation, JAR packaging, and artifact publishing.
+
 
 ---
 
+
 ## **Introduction**
+American College of Cardiology and American Heart Association (ACC/AHA) suggested a scoring system, CHA2DS2-VASc as a potential predictor of stroke for patients with atrial fibrillation(Afib), and recommended long-term oral anticoagulant for non-valvular Afib patients with moderate to high CHA2DS2-VASc scores (Male >=2 and Female >=3).
 
 More than 50 substances that affect blood coagulation have been found in human blood and tissues. Some promote coagulation, called procoagulants, and others inhibit coagulation, called anticoagulants. In the bloodstream, anticoagulants normally predominate. When the vessel is ruptured or blood is immobile for a long time, then procoagulants become activated and override. Vitamin K is required for the activation of coagulation proteins produced by the liver, such as fibrin (factor-I), thrombin (factor-II) and factor-X (Stuart-Prower factor)(Hall & Hall, 2020).
 
