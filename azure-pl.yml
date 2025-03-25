@@ -55,6 +55,11 @@ stages:
         ls -R compiled-classes
         jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C compiled-classes .
       displayName: 'Create JAR File'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: 'cha2ds2-vasc.jar'
+        ArtifactName: 'cha2ds2-vasc'
+        publishLocation: 'Container'  
 
 - stage: Archive
   displayName: 'Archive Artifacts'
