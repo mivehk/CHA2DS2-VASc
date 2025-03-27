@@ -69,6 +69,7 @@ stages:
         az artifacts universal publish \
           --organization "$(System.TeamFoundationCollectionUri)" \
           --project "$(System.TeamProject)" \
+          --scope project \
           --feed “chads-vasc-jar” \
           --name "cha2ds2-vasc" \
           --version "1.0.0-$(Build.BuildId)" \
