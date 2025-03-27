@@ -74,11 +74,11 @@ stages:
           --organization "$(System.TeamFoundationCollectionUri)" \
           --project "$(System.TeamProject)" \
           --scope project \
-          --feed “chads-vasc-jar” \
+          --feed "chads-vasc-jar" \
           --name "cha2ds2-vasc" \
           --version "1.0.0-$(Build.BuildId)" \
           --description "CHA2DS2-VASc Java JAR" \
           --path "upload"
       env:
-        AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+        AZURE_DEVOPS_EXT_ARTIFACTTOOL_PATVAR: $(System.AccessToken)
       displayName: 'Publish JAR to Azure Artifacts Feed'
