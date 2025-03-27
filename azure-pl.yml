@@ -56,24 +56,24 @@ stages:
         ls -R downloaded
         jar cvfm cha2ds2-vasc.jar MANIFEST.MF -C downloaded/compiled-classes .
       displayName: 'Create JAR File'
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: 'cha2ds2-vasc.jar'
-        ArtifactName: 'cha2ds2-vasc'
-        publishLocation: 'Container'  
 
-- stage: Archive
-  displayName: 'Archive Artifacts'
-  jobs:
-  - job: ArchiveJob
-    steps:
-    - task: DownloadBuildArtifacts@0
+    - task: UsePythonVersion@0
       inputs:
-        buildType: 'current'
-        downloadType: 'single'
-        artifactName: 'cha2ds2-vasc'
-        downloadPath: 'cha2ds2-vasc'
+        versionSpec: '3.x'
+        addToPath: true 
+
     - script: |
-        echo "Contents of downloaded JAR package:"
-        ls -lR $(System.DefaultWorkingDirectory)/cha2ds2-vasc
-      displayName: 'Verify Artifact Download'
+        pip install azure-devops
+        az extension add --name azure-devops
+        echo "##vso[task.setvariable variable=AZURE_DEVOPS_EXT_ARTIFACTTOOL_OVERRIDE]true"
+        az artifacts universal publish \
+          --organization "$(System.TeamFoundationCollectionUri)" \
+          --project "$(System.TeamProject)" \
+          --feed “chads-vasc-jar” \
+          --name "cha2ds2-vasc" \
+          --version "1.0.0-$(Build.BuildId)" \
+          --description "CHA2DS2-VASc Java JAR" \
+          --path "$(Build.SourcesDirectory)"
+      env:
+        AZURE_DEVOPS_EXT_PAT: $(System.AccessToken)
+      displayName: 'Publish JAR to Azure Artifacts Feed'
