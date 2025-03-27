@@ -69,7 +69,8 @@ stages:
         cp cha2ds2-vasc.jar upload/
         pip install azure-devops
         az extension add --name azure-devops
-        echo "##vso[task.setvariable variable=AZURE_DEVOPS_EXT_ARTIFACTTOOL_OVERRIDE]true"
+        az devops configure --defaults organization=$(System.TeamFoundationCollectionUri) project=$(System.TeamProject)
+        echo "##vso[task.setvariable variable=AZURE_DEVOPS_EXT_ARTIFACTTOOL_PATVAR]$(System.AccessToken)"
         az artifacts universal publish \
           --organization "$(System.TeamFoundationCollectionUri)" \
           --project "$(System.TeamProject)" \
